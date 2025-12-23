@@ -13,7 +13,7 @@ export const generateSEO = (
   pageType: 'home' | 'about' | 'service' | 'article' | 'condition' | 'procedure' | 'contact',
   data?: any
 ): SEOMetadata => {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://goldhabermd.co.il';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || '';
   
   const seoTemplates = {
     home: {
@@ -138,7 +138,7 @@ export const generateMedicalProcedureSchema = (procedure: any) => {
 };
 
 export const generateArticleSchema = (article: any) => {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://goldhabermd.co.il';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || '';
   
   return {
     '@context': 'https://schema.org',
@@ -154,10 +154,10 @@ export const generateArticleSchema = (article: any) => {
       name: doctorConfig.clinic.name,
     },
     datePublished: article.date,
-    url: `${baseUrl}/articles/${article.slug}`,
+    url: baseUrl ? `${baseUrl}/articles/${article.slug}` : undefined,
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `${baseUrl}/articles/${article.slug}`,
+      '@id': baseUrl ? `${baseUrl}/articles/${article.slug}` : undefined,
     },
   };
 };
@@ -178,7 +178,7 @@ export const generateFAQSchema = (faqs: Array<{ question: string; answer: string
 };
 
 export const generateBreadcrumbSchema = (items: Array<{ name: string; url: string }>) => {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://goldhabermd.co.il';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || '';
   
   return {
     '@context': 'https://schema.org',
@@ -187,7 +187,7 @@ export const generateBreadcrumbSchema = (items: Array<{ name: string; url: strin
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
-      item: `${baseUrl}${item.url}`,
+      item: baseUrl ? `${baseUrl}${item.url}` : item.url,
     })),
   };
 };

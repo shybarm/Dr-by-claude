@@ -7,7 +7,7 @@ import { generatePhysicianSchema, generateLocalBusinessSchema } from '@/lib/seo/
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldhabermd.co.il'),
+  metadataBase: process.env.NEXT_PUBLIC_SITE_URL ? new URL(process.env.NEXT_PUBLIC_SITE_URL) : null,
   title: {
     default: doctorConfig.seo.defaultTitle,
     template: `%s | ${doctorConfig.clinic.name}`,
